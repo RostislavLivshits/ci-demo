@@ -1,13 +1,18 @@
 name: Flutter CI
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  # (опционально позже)
+  # push:
+  #   tags:
+  #     - "v*"
 
 jobs:
   test:
+    name: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,7 +31,25 @@ jobs:
 
       - name: Run tests
         run: flutter test
-        
+
+  build_android_release:
+    name: build_android_release
+    runs-on: ubuntu-latest
+    needs: test
+    # билдим APK только когда это push в main (а не PR)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
       - name: Build APK (release)
         run: flutter build apk --release
 
@@ -35,3 +58,4 @@ jobs:
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
