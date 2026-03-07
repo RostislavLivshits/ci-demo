@@ -1,5 +1,7 @@
 # ci_demo
 
+[![Flutter CI](https://github.com/RostislavLivshits/ci-demo/actions/workflows/flutter_ci.yml/badge.svg)](https://github.com/RostislavLivshits/ci-demo/actions/workflows/flutter_ci.yml)
+
 A new Flutter project.
 
 ## Getting Started
