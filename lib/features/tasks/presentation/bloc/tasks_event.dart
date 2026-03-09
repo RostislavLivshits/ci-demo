@@ -2,16 +2,16 @@ import 'package:equatable/equatable.dart';
 
 import '../../domain/task.dart';
 
-abstract class TaskEvent extends Equatable {
-  const TaskEvent();
+abstract class TasksEvent extends Equatable {
+  const TasksEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class LoadTask extends TaskEvent {}
+class LoadTasks extends TasksEvent {}
 
-class AddTask extends TaskEvent {
+class AddTask extends TasksEvent {
   final Task task;
 
   const AddTask(this.task);
