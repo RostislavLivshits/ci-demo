@@ -13,7 +13,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     // on<AddTask>(_onAddTask);
   }
   Future<void> _onLoadTask(LoadTasks event, Emitter<TasksState> emit) async {
-   // emit(TasksLoading());
+    emit(TasksLoading());
     try {
       final tasks = await taskRepository.getTasks();
       emit(TasksLoaded(tasks));
